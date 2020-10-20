@@ -96,6 +96,7 @@ public class PsqlStore implements Store {
              PreparedStatement ps = cn.prepareStatement("UPDATE post SET name=? WHERE id=?")) {
             ps.setString(1, post.getName());
             ps.setInt(2, post.getId());
+            ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -105,12 +106,11 @@ public class PsqlStore implements Store {
     public Post findPostById(int id) {
         Post result = null;
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("SELECT FROM post WHERE id=?")) {
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM post WHERE id=?")) {
             ps.setInt(1, id);
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    result = new Post(rs.getInt("id"), rs.getString("name"));
-                }
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                result = new Post(rs.getInt("id"), rs.getString("name"));
             }
         } catch (Exception e) {
             e.printStackTrace();
