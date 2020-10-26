@@ -69,15 +69,16 @@ public class PsqlStore implements Store {
     @Override
     public void savePost(Post post) {
         if (post.getId() == 0) {
-            create(post);
+            createPost(post);
         } else {
-            update(post);
+            updatePost(post);
         }
     }
 
-    private Post create(Post post) {
+    private Post createPost(Post post) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("INSERT INTO post(name) VALUES (?)", PreparedStatement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement ps = cn.prepareStatement("INSERT INTO post(name) VALUES (?)",
+                     PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, post.getName());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
@@ -91,7 +92,7 @@ public class PsqlStore implements Store {
         return post;
     }
 
-    private void update(Post post) {
+    private void updatePost(Post post) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("UPDATE post SET name=? WHERE id=?")) {
             ps.setString(1, post.getName());
@@ -120,7 +121,39 @@ public class PsqlStore implements Store {
 
     @Override
     public void saveCandidate(Candidate candidate) {
+        if (candidate.getId() == 0) {
+            createCandidate(candidate);
+        } else {
+            updateCandidate(candidate);
+        }
+    }
 
+    private Candidate createCandidate(Candidate candidate) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("INSERT INTO candidate(name) VALUES (?)",
+                     PreparedStatement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, candidate.getName());
+            ps.executeUpdate();
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    candidate.setId(rs.getInt(1));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return candidate;
+    }
+
+    private void updateCandidate(Candidate candidate) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("UPDATE candidate SET name=? WHERE id=?")) {
+            ps.setString(1, candidate.getName());
+            ps.setInt(2, candidate.getId());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

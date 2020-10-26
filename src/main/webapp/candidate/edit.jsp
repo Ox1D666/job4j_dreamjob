@@ -50,6 +50,13 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
+                <label><br>Добавить фото</label>
+                <form action="<c:url value='/upload'/>" method="post" enctype="multipart/form-data">
+                    <div class="checkbox">
+                        <input type="file" name="file">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
             </div>
         </div>
     </div>

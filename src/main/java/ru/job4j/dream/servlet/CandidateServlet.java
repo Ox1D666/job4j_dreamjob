@@ -26,6 +26,6 @@ public class CandidateServlet extends HttpServlet {
                         req.getParameter("name")
                 )
         );
-        resp.sendRedirect(req.getContextPath() + "/candidate/candidates.do");
+        resp.sendRedirect(req.getContextPath() + "/candidates.do");
     }
 }
