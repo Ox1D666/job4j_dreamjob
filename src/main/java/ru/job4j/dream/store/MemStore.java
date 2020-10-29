@@ -35,6 +35,11 @@ public class MemStore implements Store {
         posts.put(post.getId(), post);
     }
 
+    @Override
+    public void deletePost(int id) {
+
+    }
+
     public Post findPostById(int id) {
         return posts.get(id);
     }
@@ -44,6 +49,11 @@ public class MemStore implements Store {
             candidate.setId(CANDIDATE_ID.incrementAndGet());
         }
         candidates.put(candidate.getId(), candidate);
+    }
+
+    @Override
+    public void deleteCandidate(int id) {
+
     }
 
     public Candidate findCandidateById(int id) {
