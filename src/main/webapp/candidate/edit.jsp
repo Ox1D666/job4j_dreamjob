@@ -34,6 +34,11 @@
 %>
 <div class="container pt-3">
     <div class="row">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> <c:out value="${user.name}"/> | Выйти</a>
+            </li>
+        </ul>
         <div class="card" style="width: 100%">
             <div class="card-header">
                 <% if (id == null) { %>
