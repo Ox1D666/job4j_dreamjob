@@ -104,6 +104,17 @@ public class PsqlStore implements Store {
     }
 
     @Override
+    public void deletePost(int id) {
+        try (Connection cn = pool.getConnection();
+                PreparedStatement ps = cn.prepareStatement("DELETE FROM post WHERE id=?")) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public Post findPostById(int id) {
         Post result = null;
         try (Connection cn = pool.getConnection();
@@ -150,6 +161,17 @@ public class PsqlStore implements Store {
              PreparedStatement ps = cn.prepareStatement("UPDATE candidate SET name=? WHERE id=?")) {
             ps.setString(1, candidate.getName());
             ps.setInt(2, candidate.getId());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteCandidate(int id) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("DELETE FROM candidate WHERE id=?")) {
+            ps.setInt(1, id);
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
