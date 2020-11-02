@@ -14,6 +14,9 @@ public class PostServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getParameter("id") != null) {
+            PsqlStore.instOf().deletePost(Integer.valueOf(req.getParameter("id")));
+        }
         req.setAttribute("posts", new ArrayList<>(PsqlStore.instOf().findAllPosts()));
         req.setAttribute("user", req.getSession().getAttribute("user"));
         req.getRequestDispatcher("post/posts.jsp").forward(req, resp);

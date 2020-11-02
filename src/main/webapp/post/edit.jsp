@@ -54,17 +54,6 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
-                <% if (id != null) { %>
-                <br>
-                <form action="<%=request.getContextPath()%>/posts.do?id=<%=post.getId()%>" method="post">
-                    <button class="btn btn-primary">Удалить</button>
-                </form>
-                <br>
-                <a href='<c:url value="/posts.do?id=${post.id}&action=remove"/>'>
-                    <i class="fa fa-remove mr-3"></i>
-                    <button class="btn btn-primary">Удалить</button>
-                </a>
-                <% } %>
             </div>
         </div>
     </div>
