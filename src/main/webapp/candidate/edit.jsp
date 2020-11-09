@@ -27,9 +27,9 @@
 <body>
 <%
     String id = request.getParameter("id");
-    Candidate can = new Candidate(0, "");
+    Candidate candidate = new Candidate(0, "");
     if (id != null) {
-        can = PsqlStore.instOf().findCandidateById(Integer.valueOf(id));
+        candidate = PsqlStore.instOf().findCandidateById(Integer.valueOf(id));
     }
 %>
 <div class="container pt-3">
@@ -48,19 +48,16 @@
                 <% } %>
             </div>
             <div class="card-body">
-                <form action="<%=request.getContextPath()%>/candidates.do?id=<%=can.getId()%>" method="post">
+                <form action="<%=request.getContextPath()%>/candidates.do?id=<%=candidate.getId()%>" method="post"
+                      enctype="multipart/form-data">
                     <div class="form-group">
                         <label>Имя</label>
-                        <input type="text" class="form-control" name="name" value="<%=can.getName()%>">
+                        <input type="text" class="form-control" name="name" value="<%=candidate.getName()%>">
                     </div>
-                    <button type="submit" class="btn btn-primary">Сохранить</button>
-                </form>
-                <label><br>Добавить фото</label>
-                <form action="<c:url value='/upload'/>" method="post" enctype="multipart/form-data">
                     <div class="checkbox">
                         <input type="file" name="file">
                     </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <br><button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
             </div>
         </div>
