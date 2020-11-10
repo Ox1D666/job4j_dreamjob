@@ -27,7 +27,7 @@
 <body>
 <%
     String id = request.getParameter("id");
-    Candidate candidate = new Candidate(0, "");
+    Candidate candidate = new Candidate(0, "", 0);
     if (id != null) {
         candidate = PsqlStore.instOf().findCandidateById(Integer.valueOf(id));
     }
@@ -36,7 +36,8 @@
     <div class="row">
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> <c:out value="${user.name}"/> | Выйти</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> <c:out value="${candidate.name}"/> |
+                    Выйти</a>
             </li>
         </ul>
         <div class="card" style="width: 100%">
@@ -48,16 +49,22 @@
                 <% } %>
             </div>
             <div class="card-body">
-                <form action="<%=request.getContextPath()%>/candidates.do?id=<%=candidate.getId()%>" method="post"
-                      enctype="multipart/form-data">
+                <form action="" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="photoId">Выберите фото</label>
+                        <br><input type="file" id="photoId" name="photoId" placeholder="photoId"/>
+                    </div>
+                    <input type="button" class="button" value="Upload" id="but_upload">
+                </form>
+                <form action="<%=request.getContextPath()%>/candidates.do?id=<%=candidate.getId()%>" method="post">
                     <div class="form-group">
                         <label>Имя</label>
                         <input type="text" class="form-control" name="name" value="<%=candidate.getName()%>">
+                        <label>Id фото</label>
+                        <input type="text" class="form-control" name="photoId" value="<%=candidate.getPhotoId()%>">
                     </div>
-                    <div class="checkbox">
-                        <input type="file" name="file">
-                    </div>
-                    <br><button type="submit" class="btn btn-primary">Сохранить</button>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
             </div>
         </div>

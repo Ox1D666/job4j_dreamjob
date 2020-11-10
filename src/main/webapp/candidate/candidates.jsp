@@ -32,7 +32,8 @@
     <div class="row">
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> <c:out value="${user.name}"/> | Выйти</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> <c:out value="${user.name}"/> |
+                    Выйти</a>
             </li>
         </ul>
         <div class="card" style="width: 100%">
@@ -53,16 +54,14 @@
                             <td>
                                 <c:out value="${candidate.name}"/>
                                 <br><a href='<c:url value="/candidate/edit.jsp?id=${candidate.id}"/>'>
-                                    <i class="fa fa-edit mr-3"></i>
-                                </a>
+                                <i class="fa fa-edit mr-3"></i></a>
                                 <br><a href='<c:url value="/candidates.do?id=${candidate.id}&action=remove"/>'>
-                                    <i class="fa fa-remove mr-3"></i>
-                                </a>
+                                <i class="fa fa-remove mr-3"></i></a>
                             </td>
                             <td>
-                                <img src="<c:url value='/download?name=${image}'/>" width="100px" height="100px"/>
+                                <img src="<c:url value='/download?name=${candidate.photoId}'/>" width="100px" height="100px"/>
                                 <p></p>
-                                <a href="<c:url value='/download?name=${image}'/>">Download</a>
+                                <a href="<c:url value='/download?name=${candidate.photoId}'/>">Download</a>
                             </td>
                         </tr>
                     </c:forEach>

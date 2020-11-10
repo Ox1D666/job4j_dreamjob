@@ -12,6 +12,12 @@ public class Candidate {
         this.name = name;
     }
 
+    public Candidate(int id, String name, int photoId) {
+        this.id = id;
+        this.name = name;
+        this.photoId = photoId;
+    }
+
     public int getId() {
         return id;
     }
