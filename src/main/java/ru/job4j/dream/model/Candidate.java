@@ -5,14 +5,14 @@ import java.util.Objects;
 public class Candidate {
     private int id;
     private String name;
-    private int photoId;
+    private String photoId;
 
     public Candidate(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Candidate(int id, String name, int photoId) {
+    public Candidate(int id, String name, String photoId) {
         this.id = id;
         this.name = name;
         this.photoId = photoId;
@@ -26,11 +26,11 @@ public class Candidate {
         this.id = id;
     }
 
-    public int getPhotoId() {
+    public String getPhotoId() {
         return photoId;
     }
 
-    public void setPhotoId(int photoId) {
+    public void setPhotoId(String photoId) {
         this.photoId = photoId;
     }
 

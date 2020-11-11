@@ -26,6 +26,11 @@ public class CandidateServlet extends HttpServlet {
             PsqlStore.instOf().deleteCandidate(Integer.valueOf(req.getParameter("id")));
         }
         req.setAttribute("candidates", new ArrayList<>(PsqlStore.instOf().findAllCandidates()));
+        List<String> images = new ArrayList<>();
+        for (File name : new File("images").listFiles()) {
+            images.add(name.getName());
+        }
+        req.setAttribute("images", images);
         req.setAttribute("user", req.getSession().getAttribute("user"));
         req.getRequestDispatcher("candidate/candidates.jsp").forward(req, resp);
     }
@@ -33,13 +38,44 @@ public class CandidateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        PsqlStore.instOf().saveCandidate(
-                new Candidate(
-                        Integer.valueOf(req.getParameter("id")),
-                        req.getParameter("name"),
-                        Integer.valueOf(req.getParameter("photoId"))
-                )
-        );
+        resp.setContentType("text/plain");
+        System.out.println(req.getParameter("name"));
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+        ServletContext servletContext = this.getServletConfig().getServletContext();
+        File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
+        factory.setRepository(repository);
+        ServletFileUpload upload = new ServletFileUpload(factory);
+        try {
+            List<FileItem> items = upload.parseRequest(req);
+            File folder = new File("images");
+            if (!folder.exists()) {
+                folder.mkdir();
+            }
+            for (FileItem item : items) {
+                if (!item.isFormField()) {
+                    File file = new File(folder + File.separator + item.getName());
+                    try (FileOutputStream out = new FileOutputStream(file)) {
+                        out.write(item.getInputStream().readAllBytes());
+                    }
+                    PsqlStore.instOf().saveCandidate(
+                            new Candidate(
+                                    Integer.valueOf(req.getParameter("id")),
+                                    req.getParameter("name"),
+                                    item.getName()
+                            )
+                    );
+                } else {
+                    PsqlStore.instOf().saveCandidate(
+                            new Candidate(
+                                    Integer.valueOf(req.getParameter("id")),
+                                    req.getParameter("name")
+                            )
+                    );
+                }
+            }
+        } catch (FileUploadException e) {
+            e.printStackTrace();
+        }
         resp.sendRedirect(req.getContextPath() + "/candidates.do");
     }
 }

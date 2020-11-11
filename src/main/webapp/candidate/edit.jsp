@@ -27,7 +27,7 @@
 <body>
 <%
     String id = request.getParameter("id");
-    Candidate candidate = new Candidate(0, "", 0);
+    Candidate candidate = new Candidate(0, "", "");
     if (id != null) {
         candidate = PsqlStore.instOf().findCandidateById(Integer.valueOf(id));
     }
@@ -51,20 +51,18 @@
             <div class="card-body">
                 <form action="" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="photoId">Выберите фото</label>
-                        <br><input type="file" id="photoId" name="photoId" placeholder="photoId"/>
+                        <label>Выберите фото</label>
+                        <br><input type="file" name="file">
                     </div>
-                    <input type="button" class="button" value="Upload" id="but_upload">
+                    <button type="submit" class="btn btn-outline-primary">Загрузить</button>
                 </form>
                 <form action="<%=request.getContextPath()%>/candidates.do?id=<%=candidate.getId()%>" method="post">
                     <div class="form-group">
                         <label>Имя</label>
                         <input type="text" class="form-control" name="name" value="<%=candidate.getName()%>">
-                        <label>Id фото</label>
-                        <input type="text" class="form-control" name="photoId" value="<%=candidate.getPhotoId()%>">
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Сохранить</button>
                 </form>
             </div>
         </div>

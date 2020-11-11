@@ -142,10 +142,10 @@ public class PsqlStore implements Store {
 
     private Candidate createCandidate(Candidate candidate) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("INSERT INTO candidate(name, photo) VALUES (?, ?)",
+             PreparedStatement ps = cn.prepareStatement("INSERT INTO candidate (name, photoid) VALUES (?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, candidate.getName());
-            ps.setInt(2, candidate.getPhotoId());
+            ps.setString(2, candidate.getPhotoId());
             ps.executeUpdate();
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 if (rs.next()) {
@@ -162,7 +162,7 @@ public class PsqlStore implements Store {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("UPDATE candidate SET name=?, photoid=? WHERE id=?")) {
             ps.setString(1, candidate.getName());
-            ps.setInt(2, candidate.getPhotoId());
+            ps.setString(2, candidate.getPhotoId());
             ps.setInt(3, candidate.getId());
             ps.executeUpdate();
         } catch (Exception e) {
@@ -190,7 +190,7 @@ public class PsqlStore implements Store {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     result = new Candidate(rs.getInt("id"), rs.getString("name"),
-                            rs.getInt("photoId"));
+                            rs.getString("photoId"));
                 }
             }
         } catch (Exception e) {
@@ -208,7 +208,7 @@ public class PsqlStore implements Store {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
                     candidates.add(new Candidate(it.getInt("id"), it.getString("name"),
-                            it.getInt("photoId")));
+                            it.getString("photoId")));
                 }
             }
         } catch (Exception e) {
