@@ -12,35 +12,22 @@
 </head>
 <body>
 <div class="container">
-    <table class="table">
-        <thead>
-        <tr>
-            <th>URL</th>
-            <th>View</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${images}" var="image" varStatus="status">
-            <tr valign="top">
-                <td>
-                    <a href="<c:url value='/download?name=${image}'/>">
-                        Download
-                    </a>
-                </td>
-                <td>
-                    <img src="<c:url value='/download?name=${image}'/>" width="100px" height="100px"/>
-                </td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-    <h2>Upload image</h2>
-    <form action="<c:url value='/upload'/>" method="post" enctype="multipart/form-data">
-        <div class="checkbox">
-            <input type="file" name="file">
+    <div class="row">
+        <div class="card" style="width: 100%">
+            <div class="card-header">
+                Выберите фото
+            </div>
+            <div class="card-body">
+                <form action="<%=request.getContextPath()%>/upload?id=<%=request.getParameter("id")%>" method="post"
+                      enctype="multipart/form-data">
+                    <div class="form-group">
+                        <input type="file" name="file">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Загрузить</button>
+                </form>
+            </div>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-    </form>
+    </div>
 </div>
 </body>
 </html>

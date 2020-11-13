@@ -4,6 +4,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import ru.job4j.dream.model.Candidate;
+import ru.job4j.dream.store.PsqlStore;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -47,11 +49,17 @@ public class UploadServlet extends HttpServlet {
                     try (FileOutputStream out = new FileOutputStream(file)) {
                         out.write(item.getInputStream().readAllBytes());
                     }
+                    System.out.println(req.getParameter("id"));
+                    PsqlStore.instOf().saveCandidate(new Candidate(
+                            Integer.valueOf(req.getParameter("id")),
+                            req.getParameter("name"),
+                            Integer.valueOf(req.getParameter("id"))
+                    ));
                 }
             }
         } catch (FileUploadException e) {
             e.printStackTrace();
         }
-        doGet(req, resp);
+        resp.sendRedirect(req.getContextPath() + "/candidates.do");
     }
 }

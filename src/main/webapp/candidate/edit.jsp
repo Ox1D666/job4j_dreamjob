@@ -27,42 +27,52 @@
 <body>
 <%
     String id = request.getParameter("id");
-    Candidate candidate = new Candidate(0, "", "");
+    Candidate candidate = new Candidate(0, "", 0);
     if (id != null) {
         candidate = PsqlStore.instOf().findCandidateById(Integer.valueOf(id));
     }
 %>
 <div class="container pt-3">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp">
+                <c:out value="${candidate.name}"/> | Выйти</a>
+        </li>
+    </ul>
     <div class="row">
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> <c:out value="${candidate.name}"/> |
-                    Выйти</a>
-            </li>
-        </ul>
+        <div class="card" style="width: 100%">
+            <div class="card-header">
+                Выберите фото
+            </div>
+            <div class="card-body">
+                <form action="<%=request.getContextPath()%>/upload?id=<%=candidate.getId()%>" method="post"
+                      enctype="multipart/form-data">
+                    <div class="form-group">
+                        <input type="file" name="file">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Загрузить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
                 <% if (id == null) { %>
-                Новый кандидат.
+                Новый кандидат
                 <% } else { %>
-                Редактирование анкеты.
+                Редактирование анкеты
                 <% } %>
             </div>
             <div class="card-body">
-                <form action="" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label>Выберите фото</label>
-                        <br><input type="file" name="file">
-                    </div>
-                    <button type="submit" class="btn btn-outline-primary">Загрузить</button>
-                </form>
                 <form action="<%=request.getContextPath()%>/candidates.do?id=<%=candidate.getId()%>" method="post">
                     <div class="form-group">
                         <label>Имя</label>
                         <input type="text" class="form-control" name="name" value="<%=candidate.getName()%>">
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Сохранить</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
             </div>
         </div>
