@@ -11,10 +11,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="container">
+<div class="container pt-3">
     <div class="row">
         <div class="card" style="width: 100%">
-            <div class="card-header">
+            <br><div class="card-header">
                 Выберите фото
             </div>
             <div class="card-body">

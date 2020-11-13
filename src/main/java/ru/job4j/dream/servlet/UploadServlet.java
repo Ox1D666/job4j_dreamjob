@@ -32,6 +32,7 @@ public class UploadServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println(req.getParameter("id"));
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletContext servletContext = this.getServletConfig().getServletContext();
         File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
@@ -43,6 +44,7 @@ public class UploadServlet extends HttpServlet {
             if (!folder.exists()) {
                 folder.mkdir();
             }
+            System.out.println(req.getParameter("id"));
             for (FileItem item : items) {
                 if (!item.isFormField()) {
                     File file = new File(folder + File.separator + item.getName());
@@ -60,6 +62,6 @@ public class UploadServlet extends HttpServlet {
         } catch (FileUploadException e) {
             e.printStackTrace();
         }
-        resp.sendRedirect(req.getContextPath() + "/candidates.do");
+        resp.sendRedirect(req.getContextPath() + "/candidate/edit.jsp");
     }
 }

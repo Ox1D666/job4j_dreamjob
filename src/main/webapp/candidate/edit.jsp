@@ -39,23 +39,32 @@
                 <c:out value="${candidate.name}"/> | Выйти</a>
         </li>
     </ul>
+    <%--    <div class="row">--%>
+    <%--        <div class="card" style="width: 100%">--%>
+    <%--            <div class="card-header">--%>
+    <%--                Выберите фото--%>
+    <%--            </div>--%>
+    <%--            <div class="card-body">--%>
+    <%--                                <form action="<%=request.getContextPath()%>/upload?id=<%=candidate.getId()%>" method="post"--%>
+    <%--                                      enctype="multipart/form-data">--%>
+    <%--                                    <div class="form-group">--%>
+    <%--                                        <input type="file" name="file">--%>
+    <%--                                    </div>--%>
+    <%--                                    <button type="submit" class="btn btn-primary">Загрузить</button>--%>
+    <%--                                </form>--%>
+    <%--            </div>--%>
+    <%--        </div>--%>
+    <%--    </div>--%>
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Выберите фото
-            </div>
-            <div class="card-body">
-                <form action="<%=request.getContextPath()%>/upload?id=<%=candidate.getId()%>" method="post"
-                      enctype="multipart/form-data">
-                    <div class="form-group">
-                        <input type="file" name="file">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Загрузить</button>
-                </form>
+                <td><a href='<c:url value="/upload.jsp?id=<%=candidate.getId()%>"/>'>
+                    <i class="fa fa-edit mr-3">Upload</i></a>
+                    <br>
+                </td>
             </div>
         </div>
     </div>
-    <br>
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
