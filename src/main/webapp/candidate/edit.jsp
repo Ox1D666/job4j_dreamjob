@@ -58,7 +58,7 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                <td><a href='<c:url value="/upload.jsp?id=<%=candidate.getId()%>"/>'>
+                <td><a href="<%=request.getContextPath()%>/upload?id=<%=candidate.getId()%>">
                     <i class="fa fa-edit mr-3">Upload</i></a>
                     <br>
                 </td>
