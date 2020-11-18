@@ -27,7 +27,12 @@
     <div class="row">
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> <c:out value="${user.name}"/> | Выйти</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> <c:out value="${user.name}"/> |
+                    Выйти</a>
+            </li>
+            <p></p>
+            <li class="nav-item">
+                <a class="nav-link" href='<c:url value="/index.do"/>'>Назад</a>
             </li>
         </ul>
         <div class="card" style="width: 100%">
@@ -47,11 +52,11 @@
                             <td>
                                 <c:out value="${post.name}"/>
                                 <br><a href='<c:url value="/post/edit.jsp?id=${post.id}"/>'>
-                                    <i class="fa fa-edit mr-3"></i>
-                                </a>
+                                <i class="fa fa-edit mr-3"></i>
+                            </a>
                                 <br><a href='<c:url value="/posts.do?id=${post.id}&action=remove"/>'>
-                                    <i class="fa fa-remove mr-3"></i>
-                                </a>
+                                <i class="fa fa-remove mr-3"></i>
+                            </a>
                             </td>
                         </tr>
                     </c:forEach>

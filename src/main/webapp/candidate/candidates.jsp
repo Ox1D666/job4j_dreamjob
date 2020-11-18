@@ -35,6 +35,9 @@
                 <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> <c:out value="${user.name}"/> |
                     Выйти</a>
             </li>
+            <p></p><li class="nav-item">
+                <a class="nav-link" href='<c:url value="/index.do"/>'>Назад</a>
+            </li>
         </ul>
         <div class="card" style="width: 100%">
             <div class="card-header">
@@ -59,9 +62,10 @@
                                 <i class="fa fa-remove mr-3"></i></a>
                             </td>
                             <td>
-                                <img src="<c:url value='/download?name=${candidate.photoId}'/>" width="100px" height="100px"/>
-                                <p></p>
-                                <a href="<c:url value='/download?name=${candidate.photoId}'/>">Download</a>
+                                <a href="<c:url value='/upload?id=${candidate.id}'/>">
+                                    <i class="fa fa-edit mr-3">Загрузить фото</i></a>
+                                <p></p><img src="<c:url value='/download?name=${candidate.id}'/>" width="100px" height="100px"/>
+                                <p></p><a href="<c:url value='/download?name=${candidate.id}'/>">Скачать</a>
                             </td>
                         </tr>
                     </c:forEach>
