@@ -221,7 +221,7 @@ public class PsqlStore implements Store {
     public User findUserByEmail(String email) {
         User result = null;
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("SELECT FROM user_account WHERE email=?")) {
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM user_account WHERE email=?")) {
             ps.setString(1, email);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
