@@ -40,9 +40,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> <c:out value="${user.name}"/> | Выйти</a>
             </li>
-            <li>
-                <a class="nav-link" href="<c:url value='upload.jsp'/>">Upload</a>
-            </li>
         </ul>
     </div>
     <div class="row">

@@ -25,6 +25,8 @@ public interface Store {
 
     Candidate findCandidateById(int id);
 
+    User findUserByEmail(String email);
+
     void saveUser(User user);
 
     void deleteUser(int id);
