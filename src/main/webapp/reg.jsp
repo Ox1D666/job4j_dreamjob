@@ -29,7 +29,7 @@
     <div class="row">
         <ul class="nav">
             <li class="nav-item">
-            <a class="nav-link" href='<c:url value="/index.do"/>'>Назад</a>
+            <a class="nav-link" href='<c:url value="/login.jsp"/>'>Назад</a>
         </li>
         </ul>
         <div class="card" style="width: 100%">

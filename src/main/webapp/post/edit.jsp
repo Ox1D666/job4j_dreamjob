@@ -36,7 +36,10 @@
     <div class="row">
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> <c:out value="${user.name}"/> | Выйти</a>
+                <a class="nav-link" href='<c:url value="/index.do"/>'>Назад</a>
+            </li>
+            <p></p><li class="nav-item">
+                <a class="nav-link" href="<c:url value='/auth.do'/>"> <c:out value="${user.name}"/> | Выйти</a>
             </li>
         </ul>
         <div class="card" style="width: 100%">

@@ -188,7 +188,7 @@ public class PsqlStore implements Store {
              PreparedStatement ps = cn.prepareStatement("SELECT * FROM candidate WHERE id=?")) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
+                if (rs.next()) {
                     result = new Candidate(rs.getInt("id"), rs.getString("name"),
                             rs.getInt("photoId"));
                 }
@@ -224,7 +224,7 @@ public class PsqlStore implements Store {
              PreparedStatement ps = cn.prepareStatement("SELECT * FROM user_account WHERE email=?")) {
             ps.setString(1, email);
             try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
+                if (rs.next()) {
                     result = new User(rs.getInt("id"), rs.getString("name"),
                             rs.getString("email"), rs.getString("password"));
                 }
