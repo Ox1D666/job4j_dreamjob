@@ -17,64 +17,67 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
-
+    <script>
+        function validate() {
+            valid = true;
+            if ($('#name').val() == '') {
+                alert("Input name");
+                valid = false;
+            }
+            if ($('#pwd').val() == '') {
+                alert("Input password");
+                valid = false;
+            }
+            if (($('#male').val() == false) && ($('#female').val() == false)) {
+                alert("Choose sex");
+                valid = false;
+            }
+            if ($('#desc').val() == '') {
+                alert("Write description");
+                valid = false;
+            }
+            return valid;
+        }
+    </script>
 </head>
 <body>
-
 <div class="container-fluid">
     <h1>My First Bootstrap Page</h1>
     <p>Questionnaire</p>
 </div>
 <div>
-    <form action="Index.html">
+    <form action="Index.html" name="form">
         <div class="form-group">
             <label>Name</label>
             </br>
             <label>
-                <input type="text" class="form-control" name="name" placeholder="Enter name:">
+                <input type="text" class="form-control" name="name" placeholder="Enter name:" id="name">
             </label>
         </div>
         <div class="form-group">
             <label>Surname</label>
             </br>
             <label>
-                <input type="text" class="form-control" name="surname" placeholder="Enter surname:">
+                <input type="text" class="form-control" name="surname" placeholder="Enter surname:" id="pwd">
             </label>
         </div>
         <div class="form-group">
             <label>Sex:</label>
             </br>
             <label>
-                <input type="radio" name="sex"> Male
-                <input type="radio" name="sex"> Female
+                <input type="radio" name="sex" id="male"> Male
+                <input type="radio" name="sex" id="female"> Female
             </label>
         </div>
         <div class="form-group">
             <label>Description:</label>
             </br>
             <label>
-                <textarea name="description"></textarea>
+                <textarea name="description" id="desc"></textarea>
             </label>
         </div>
+        <button type="button" class="btn btn-primary" onclick="return validate();">Submit</button>
     </form>
 </div>
-<table class="table">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Surname</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>
-            Kirill
-        </td>
-        <td>
-            Romanov
-        </td>
-    </tr>
-    </tbody>
-</table>
 </body>
 </html>
