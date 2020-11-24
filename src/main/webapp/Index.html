@@ -20,19 +20,19 @@
     <script>
         function validate() {
             valid = true;
-            if ($('#name').val() == '') {
+            if ($('#name').val() === '') {
                 alert("Input name");
                 valid = false;
             }
-            if ($('#pwd').val() == '') {
+            if ($('#pwd').val() === '') {
                 alert("Input password");
                 valid = false;
             }
-            if (($('#male').val() == false) && ($('#female').val() == false)) {
+            if ($('input[name=sex]:checked').length < 1) {
                 alert("Choose sex");
                 valid = false;
             }
-            if ($('#desc').val() == '') {
+            if ($('#desc').val() === '') {
                 alert("Write description");
                 valid = false;
             }
